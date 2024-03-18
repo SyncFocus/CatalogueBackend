@@ -32,7 +32,15 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 app.use(bodyParser.json())
-app.use(cors())
+app.use(cors({origin:[
+  "https://cataloguebackend.onrender.com/api/catalogue/add",
+  "https://cataloguebackend.onrender.com/api/catalogue/all",
+  "https://cataloguebackend.onrender.com/api/catalogue/update/*",
+  "http://cataloguebackend.onrender.com/api/catalogue/delete/*",
+  "https://products.sonarbanglakolkata.com/*",
+  "http://localhost:3000/*"
+  
+]}))
 app.use('/api/catalogue',require('./routes/catalogue'))
 app.listen(PORT,()=>{
     console.log("App is listening")
