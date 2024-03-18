@@ -32,7 +32,15 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 app.use(bodyParser.json())
-app.use(cors({ origin: '*' }));
+//app.use(cors({ origin: '*' }));
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
 app.use('/api/catalogue',require('./routes/catalogue'))
 app.listen(PORT,()=>{
     console.log("App is listening")
